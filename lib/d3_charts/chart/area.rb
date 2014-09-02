@@ -7,9 +7,10 @@ module D3Charts
       end
 
       def dom_data
-        super.merge({
-          margin: @options.fetch(:margin)
-        })
+        res = {}
+        res[:margin] = @options[:margin] if @options[:margin]
+        res[:format] = @options[:format] if @options[:format]
+        super.merge(res)
       end
 
     end

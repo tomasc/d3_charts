@@ -15,11 +15,11 @@ module D3Charts
     end
 
     def dom_data
-      {
-        chart_data: @chart_data.to_json,
-        width: @options[:width],
-        height: @options[:height]
-      }
+      res = {}
+      res[:chart_data] = @chart_data.to_json
+      res[:width] = @options[:width] if @options[:width]
+      res[:height] = @options[:height] if @options[:height]
+      res
     end
 
     def tag

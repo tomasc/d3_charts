@@ -50,6 +50,7 @@ Available `options` are:
 * `width`, defaults to 1000
 * `height`, defaults to 1000
 * `margin`, defaults to 25
+* `format`, the strftime format of the dates, defaults to `%d/%m/%y`
 
 Which are passed in like so:
 

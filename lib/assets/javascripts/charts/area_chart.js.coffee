@@ -12,6 +12,7 @@
     height: 1000
     margin: 40
     ticks: 'days'
+    format: "%d/%m/%y"
 
   # ---------------------------------------------------------------------
 
@@ -36,14 +37,16 @@
     get_width: -> @$element.data('width') || @options.width
     get_height: -> @$element.data('height') || @options.height
     get_margin: -> @$element.data('margin') || @options.margin
+    get_format: -> @$element.data('format') || @options.format
     get_ticks: ->
-      switch @$element.data('ticks') || @options.ticks
-        when 'years'
-          { ticks: d3.time.years, format: d3.time.format("%y") }
-        when 'months'
-          { ticks: d3.time.months, format: d3.time.format("%m/%y") }
-        when 'days'
-          { ticks: d3.time.days, format: d3.time.format("%d/%m/%y") }
+      format = @$element.data('format') || @options.format
+      if /%d|%e/.test(format)
+        d3.time.days
+      else if /%m|%B|%b|%h/.test(format)
+        d3.time.months
+        alert format
+      else if /%y|%Y/.test(format)
+        d3.time.years
 
     # ---------------------------------------------------------------------
 
@@ -54,12 +57,12 @@
 
       width = @get_width() - @get_margin()*2
       height = @get_height() - @get_margin()*2
-      parseDate = d3.time.format("%Y-%m-%d").parse
+      parseDate = d3.time.format(@get_format()).parse
 
       x = d3.time.scale().range([0, width])
       y = d3.scale.linear().range([height, 0])
 
-      xAxis = d3.svg.axis().scale(x).orient("bottom").ticks(@get_ticks()['ticks'], 1).tickSize(0).tickPadding(5).tickFormat(@get_ticks()['format'])
+      xAxis = d3.svg.axis().scale(x).orient("bottom").ticks(@get_ticks(), 1).tickSize(0).tickPadding(5).tickFormat(d3.time.format(@get_format()))
       yAxis = d3.svg.axis().scale(y).orient("left").ticks(2).tickSize(0).tickPadding(5)
 
       area = d3.svg.area().interpolate("basis").x((d) -> x d.label).y0(height).y1((d) -> y d.value)
