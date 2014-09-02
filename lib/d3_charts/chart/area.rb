@@ -6,6 +6,12 @@ module D3Charts
         super + %w(area)
       end
 
+      def dom_data
+        super.merge({
+          margin: @options.fetch(:margin)
+        })
+      end
+
     end
   end
 end
