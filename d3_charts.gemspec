@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'd3_charts/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "d3-charts"
+  spec.name          = "d3_charts"
   spec.version       = D3::Charts::VERSION
   spec.authors       = ["Tomas Celizna"]
   spec.email         = ["tomas.celizna@gmail.com"]
