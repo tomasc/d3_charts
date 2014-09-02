@@ -18,9 +18,50 @@ Or install it yourself as:
 
     $ gem install d3_charts
 
+To make it work you need to require the javascripts in `application.js`:
+
+    //= require d3_charts
+
+To add some basic colouring of pie charts, add the the following in `application.css`:
+
+    *= require 'd3_charts'
+
 ## Usage
 
-TODO:
+### Pie charts
+
+    = pie_chart(data, options)
+
+Available `options` are:
+
+* `width`, defaults to 1000
+* `height`, defaults to 1000
+
+Which are passed in like so:
+
+    = pie_chart(data, { width: 123, height: 123 })
+
+### Area charts
+
+    = area_chart(data, options)
+
+Available `options` are:
+
+* `width`, defaults to 1000
+* `height`, defaults to 1000
+* `margin`, defaults to 25
+
+Which are passed in like so:
+
+    = area_chart(data, { width: 123, height: 123, margin: 25 })
+
+## TODO:
+
+* Add more charts:
+  * Line Chart
+  * Histogram Chart
+  * Vertical Bar Chart
+  * Horizontal Bar Chart
 
 ## Contributing
 
