@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "rails", ">= 4.1.0"
-  spec.add_dependency "rails-assets-d3", "~> 3.4"
+  spec.add_dependency "rails-assets-d3", "~> 3.4.11"
 
   spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "guard"
