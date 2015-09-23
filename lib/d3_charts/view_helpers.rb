@@ -11,19 +11,14 @@ module D3Charts
       end
     end
 
-    # ---------------------------------------------------------------------
+    # =====================================================================
 
-    def pie_chart chart_data, options={}
-      Chart::Pie.new(chart_data, options).tag.html_safe
+    def chart_tag chart_type, chart_data, options={}
+      case chart_type
+      when :pie then Chart::Pie.new(chart_data, options).tag.html_safe
+      when :area then Chart::Area.new(chart_data, options).tag.html_safe
+      end
     end
-
-    # ---------------------------------------------------------------------
-
-    def area_chart chart_data, options={}
-      Chart::Area.new(chart_data, options).tag.html_safe
-    end
-
-    # ---------------------------------------------------------------------
 
   end
 end

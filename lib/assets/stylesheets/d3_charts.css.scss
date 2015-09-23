@@ -10,6 +10,6 @@ $colors: (aliceblue, antiquewhite, aqua, aquamarine, azure, beige, bisque, black
 
 .chart.container.area {
   svg {
-    // padding: 25px;
+    overflow: visible;
   }
 }

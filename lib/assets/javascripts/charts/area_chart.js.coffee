@@ -10,9 +10,9 @@
     debug: false
     width: 1000
     height: 1000
-    margin: 40
-    ticks: 'days'
-    format: "%d/%m/%y"
+    ticks: 'months'
+    data_date_format: "%Y-%m-%d"
+    date_format: "%Y-%m-%d"
 
   # ---------------------------------------------------------------------
 
@@ -33,43 +33,37 @@
 
     # ---------------------------------------------------------------------
 
-    get_data: -> @$element.data 'chart-data'
-    get_width: -> @$element.data('width') || @options.width
+    get_data: -> @$element.data 'chart-data' || []
+    get_data_date_format: -> @$element.data('data-date-format') || @options.data_date_format
+    get_date_format: -> @$element.data('date-format') || @options.date_format
     get_height: -> @$element.data('height') || @options.height
-    get_margin: -> @$element.data('margin') || @options.margin
-    get_format: -> @$element.data('format') || @options.format
     get_ticks: ->
-      format = @$element.data('format') || @options.format
-      if /%d|%e/.test(format)
-        d3.time.days
-      else if /%m|%B|%b|%h/.test(format)
-        d3.time.months
-        alert format
-      else if /%y|%Y/.test(format)
-        d3.time.years
+      switch @$element.data('ticks') || @options.ticks
+        when 'days' then d3.time.days
+        when 'months' then d3.time.months
+        when 'years' then d3.time.years
+    get_width: -> @$element.data('width') || @options.width
 
     # ---------------------------------------------------------------------
 
     render: ->
       data = @get_data()
 
-      console.log data
-
-      width = @get_width() - @get_margin()*2
-      height = @get_height() - @get_margin()*2
-      parseDate = d3.time.format(@get_format()).parse
+      width = @get_width()
+      height = @get_height()
+      parseDate = d3.time.format(@get_data_date_format()).parse
 
       x = d3.time.scale().range([0, width])
       y = d3.scale.linear().range([height, 0])
 
-      xAxis = d3.svg.axis().scale(x).orient("bottom").ticks(@get_ticks(), 1).tickSize(0).tickPadding(5).tickFormat(d3.time.format(@get_format()))
+      xAxis = d3.svg.axis().scale(x).orient("bottom").ticks(@get_ticks(), 1).tickSize(0).tickPadding(5).tickFormat(d3.time.format(@get_date_format()))
       yAxis = d3.svg.axis().scale(y).orient("left").ticks(2).tickSize(0).tickPadding(5)
 
       area = d3.svg.area().interpolate("basis").x((d) -> x d.label).y0(height).y1((d) -> y d.value)
-      svg = d3.select(@$element[0]).append("svg").attr("width", @get_width()).attr("height", @get_height()).attr("viewBox", "0 0 #{@get_height()} #{@get_width()}").attr("xmlns", "http://www.w3.org/2000/svg").append("g").attr("transform", "translate(#{@get_margin()},#{@get_margin()})")
+      svg = d3.select(@$element[0]).append("svg").attr("width", @get_width()).attr("height", @get_height()).attr("viewBox", "0 0 #{@get_height()} #{@get_width()}").attr("xmlns", "http://www.w3.org/2000/svg").append("g")
 
       data.forEach (d) ->
-        d.label = parseDate(d.label)
+        d.label = parseDate(d.date)
         d.value = +d.value
 
       x.domain d3.extent(data, (d) -> d.label)
@@ -94,10 +88,4 @@
 
 # =====================================================================
 
-$ ->
-
-  $('.chart.container.area').chart_area()
-
-  # make sure the plugin is correctly rebound to new elements
-  $('body').on 'dom_update', (e) ->
-    $('.chart.container.area').chart_area()
+$ -> $('.chart.container.area').chart_area()

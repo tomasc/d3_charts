@@ -8,8 +8,8 @@ module D3Charts
 
       def dom_data
         res = {}
-        res[:margin] = @options[:margin] if @options[:margin]
-        res[:format] = @options[:format] if @options[:format]
+        res[:date_format] = @options[:date_format]
+        res[:data_date_format] = @options[:data_date_format]
         super.merge(res)
       end
 

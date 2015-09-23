@@ -59,10 +59,4 @@
 
 # =====================================================================
 
-$ ->
-
-  $('.chart.container.pie').chart_pie()
-
-  # make sure the plugin is correctly rebound to new elements
-  $('body').on 'dom_update', (e) ->
-    $('.chart.container.pie').chart_pie()
+$ -> $('.chart.container.pie').chart_pie()

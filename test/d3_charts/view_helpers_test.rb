@@ -10,16 +10,16 @@ module D3Charts
 
     # =====================================================================
 
-    describe '#pie_chart' do
+    describe '#chart_tag' do
       let(:data) { [{ value: 125, label: 'foo' }, { value: 325, label: 'bar' }] }
 
       it 'wraps the chart in a div' do
-        pie_chart(data).must_match Regexp.new("<div.*?></div>")
+        chart_tag(:pie, data).must_match Regexp.new("<div.*?></div>")
       end
 
       it 'returns the correct data' do
         skip
-        pie_chart(data).must_include "data-chart-data=\"#{data}\">"
+        chart_tag(:pie, data).must_include "data-chart-data=\"#{data}\">"
       end
     end
 
@@ -29,12 +29,12 @@ module D3Charts
       let(:data) { [{ date: '2014-08-02', value: 100 }, { date: '2014-09-02', value: 200 }] }
 
       it 'wraps the chart in a div' do
-        area_chart(data).must_match Regexp.new("<div.*?></div>")
+        chart_tag(:area, data).must_match Regexp.new("<div.*?></div>")
       end
 
       it 'returns the correct data' do
         skip
-        area_chart(data).must_include "data-chart-data=\"#{data}\">"
+        chart_tag(:area, data).must_include "data-chart-data=\"#{data}\">"
       end
     end
 

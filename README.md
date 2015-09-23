@@ -30,7 +30,7 @@ To add some basic colouring of pie charts, add the the following in `application
 
 ### Pie charts
 
-    = pie_chart(data, options)
+    = chart_tag(:pie, data, options)
 
 Available `options` are:
 
@@ -39,26 +39,26 @@ Available `options` are:
 
 Which are passed in like so:
 
-    = pie_chart(data, { width: 123, height: 123 })
+    = chart_tag(:pie, data, { width: 123, height: 123 })
 
 ### Area charts
 
-    = area_chart(data, options)
+    = chart_tag(:area, data, options)
 
 Available `options` are:
 
 * `width`, defaults to 1000
 * `height`, defaults to 1000
-* `margin`, defaults to 25
-* `format`, the strftime format of the dates, defaults to `%d/%m/%y`
+* `date_format`, the strftime format of datums as rendered in the chart, defaults to `%Y-%m-%d`
+* `data_date_format`, the strftime format of datums as specified in the data, defaults to `%Y-%m-%d`
 
 Which are passed in like so:
 
-    = area_chart(data, { width: 123, height: 123, margin: 25 })
+    = chart_tag(:area, data, { width: 123, height: 123 })
 
 ## TODO:
 
-* Add more charts:
+* More charts:
   * Line Chart
   * Histogram Chart
   * Vertical Bar Chart

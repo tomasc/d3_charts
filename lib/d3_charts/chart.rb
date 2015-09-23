@@ -17,13 +17,13 @@ module D3Charts
     def dom_data
       res = {}
       res[:chart_data] = @chart_data.to_json
-      res[:width] = @options[:width] if @options[:width]
-      res[:height] = @options[:height] if @options[:height]
+      res[:width] = @options[:width]
+      res[:height] = @options[:height]
       res
     end
 
     def tag
-      content_tag(:div, nil, { class: dom_class, data: dom_data })
+      content_tag(:div, nil, { class: dom_class, data: dom_data.delete_if{ |k, v| v.blank? } })
     end
 
   end
