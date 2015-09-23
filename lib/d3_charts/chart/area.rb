@@ -2,6 +2,10 @@ module D3Charts
   class Chart
     class Area < Chart
 
+      def chart_type
+        :area
+      end
+
       def dom_class
         super + %w(area)
       end

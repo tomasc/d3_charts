@@ -17,6 +17,7 @@ module D3Charts
     def dom_data
       res = {}
       res[:chart_data] = @chart_data.to_json
+      res[:chart_type] = chart_type
       res[:width] = @options[:width]
       res[:height] = @options[:height]
       res
