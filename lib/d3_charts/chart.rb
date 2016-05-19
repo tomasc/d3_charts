@@ -1,11 +1,8 @@
 module D3Charts
   class Chart
-
     include ActionView::Helpers::TagHelper
 
-    # ---------------------------------------------------------------------
-
-    def initialize chart_data, options={}
+    def initialize(chart_data, options = {})
       @chart_data = chart_data
       @options = options
     end
@@ -24,8 +21,7 @@ module D3Charts
     end
 
     def tag
-      content_tag(:div, nil, { class: dom_class, data: dom_data.delete_if{ |k, v| v.blank? } })
+      content_tag(:div, nil, class: dom_class, data: dom_data.delete_if { |_k, v| v.blank? })
     end
-
   end
 end

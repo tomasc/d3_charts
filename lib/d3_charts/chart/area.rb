@@ -1,7 +1,6 @@
 module D3Charts
   class Chart
     class Area < Chart
-
       def chart_type
         :area
       end
@@ -16,7 +15,6 @@ module D3Charts
         res[:data_date_format] = @options[:data_date_format]
         super.merge(res)
       end
-
     end
   end
 end

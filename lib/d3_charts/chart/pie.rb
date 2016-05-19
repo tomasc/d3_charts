@@ -1,7 +1,6 @@
 module D3Charts
   class Chart
     class Pie < Chart
-
       def chart_type
         :pie
       end
@@ -9,7 +8,6 @@ module D3Charts
       def dom_class
         super + %w(pie)
       end
-
     end
   end
 end
