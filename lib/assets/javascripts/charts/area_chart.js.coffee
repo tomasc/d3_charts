@@ -74,6 +74,8 @@
       svg.append("g").attr("class", "x axis").attr("transform", "translate(0,#{height})").call(xAxis)
       svg.append("g").attr("class", "y axis").call(yAxis)
 
+      @$element.trigger 'chart.render'
+
   # ---------------------------------------------------------------------
 
   # prevents multiple instantiation on same DOM element

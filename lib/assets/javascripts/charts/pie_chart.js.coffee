@@ -25,7 +25,8 @@
 
       @init()
 
-    init: -> @render()
+    init: ->
+      @render()
 
     # ---------------------------------------------------------------------
 
@@ -44,6 +45,8 @@
 
       g = svg.selectAll(".arc").data(pie(data)).enter().append("g").attr("class", "arc")
       g.append("path").attr("d", arc).attr("class", (d) => "color_#{@get_data().indexOf(d.data)}").attr("title", (d) -> d.data.label)
+
+      @$element.trigger 'chart.render'
 
   # ---------------------------------------------------------------------
 
